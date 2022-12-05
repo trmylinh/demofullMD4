@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<h3>Login</h3>
+<input type="text" id="username" placeholder="username">
+<input type="password" id="password" placeholder="password">
+<a href="./register.html">Register</a>
+<button onclick="login()">Enter</button>
+
+<!-- ajax -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+<script>
+    function login(){
+        // val() return value attribute
+        let username = $('#username').val();
+        let password = $('#password').val();
+        let user = {
+            username: username,
+            password: password
+        }
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:3000/auth/login',
+            data: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            success: (token) => {
+                localStorage.setItem('token',token.token);
+                // chuyen sang index
+                
+            }
+
+        })
+    }
+</script>
+</body>
+</html>
